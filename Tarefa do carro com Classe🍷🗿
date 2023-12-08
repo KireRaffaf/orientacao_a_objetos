@@ -1,0 +1,52 @@
+class Carro():
+
+    status_motor = False
+    status_andar = False
+
+    def ligar_motor(self):
+        self.status_motor = True
+        print('Vrum,vrum')
+
+    def desligar_motor(self):
+        self.status_motor = False
+
+    def andar(self):
+        if self.status_motor == True:
+            self.status_andar = True
+            return 'O carro está andando'
+        else:
+            return 'Precisa ligar o motor'
+        
+    def parar(self):
+        self.status_andar = False
+        return 'O carro parou'
+    
+    def status(self):
+        if self.status_andar:
+            a = 'em movimento'
+        else:
+            a = 'parado'
+        if self.status_motor:
+            b = 'O motor está ligado'
+        else:
+            b = 'O motor está desligado'
+        print(f'{b} e o carro está {a}\n')
+    
+carrinho = Carro()
+
+#Etapa 01 - Carro parado
+
+# carrinho.status()
+
+# Etapa 02 - Carro ligado , parado
+
+# carrinho.ligar_motor()
+# carrinho.status()
+
+# Etapa 03 - Carro ligado , andando
+
+# carrinho.status()
+# carrinho.ligar_motor()
+# carrinho.status()
+# carrinho.andar()
+# carrinho.status()
