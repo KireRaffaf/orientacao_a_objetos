@@ -1,0 +1,130 @@
+import math
+class FormaGeometrica():
+
+    def __init__(self, lado):
+        self.__lado = lado
+
+    @property
+    def lado(self):
+        return self.__lado
+
+    @property
+    def area(self):
+        pass
+
+    @property
+    def perimetro(self):
+        pass
+
+class Quadrado(FormaGeometrica):
+
+    def __init__(self, lado):
+        super().__init__(lado)
+        
+    @property
+    def area(self):
+        return self.lado ** 2
+
+    @property
+    def perimetro(self):
+        return self.lado * 4
+qd = Quadrado(2)
+print(f'A área do quadrado é {qd.area} e o perímetro é {qd.perimetro}')
+
+class Retangulo(FormaGeometrica):
+    
+    def __init__(self, lado, altura):
+        self.__altura = altura
+        super().__init__(lado)
+    
+    @property
+    def area(self):
+        return self.lado * self.__altura
+    
+    @property
+    def perimetro(self):
+        return 2 * (self.lado + self.__altura)
+retan = Retangulo(2,4)
+print(f'A área do retângulo é {retan.area} e o perímetro é {retan.perimetro}')
+
+class Circulo(FormaGeometrica):
+    
+    def __init__(self, lado):
+        super().__init__(lado)
+
+    @property
+    def area(self):
+        return math.pi * (self.lado**2)
+    
+    @property
+    def perimetro(self):
+        return 2 * math.pi * self.lado
+circ = Circulo(2)
+print(f'A área do círculo é {circ.area} e sua circunferência é {circ.perimetro}')
+
+class Triangulo(FormaGeometrica):
+    
+    def __init__(self, lado, altura, lado_a, lado_b, lado_c):
+        super().__init__(lado)
+        self.__altura = altura
+        self.__ladoA = lado_a
+        self.__ladoB = lado_b
+        self.__ladoC = lado_c
+        
+    @property
+    def area(self):
+        return self.lado * self.__altura / 2
+    
+    @property
+    def perimetro(self):
+        return self.__ladoA + self.__ladoB + self.__ladoC
+    
+    @property
+    def tipo_triangulo(self) -> str:
+        if self.__ladoA < 60 and self.__ladoB < 60 and self.__ladoC < 60:
+            return f'Triangulo acutângulo'
+
+        elif self.__ladoA == self.__ladoB and self.__ladoA == self.__ladoC:
+            return 'Triangulo equilatero'
+
+        elif self.__ladoA == self.__ladoB or self.__ladoA == self.__ladoC or self.__ladoB == self.__ladoC:
+            return 'Triangulo Isoceles'
+        
+        elif self.__ladoA + self.__ladoB == 90 or self.__ladoA + self.__ladoC == 90 or self.__ladoB + self.__ladoC == 90:
+            return 'Triangulo retangulo'
+
+        else:
+            return 'Triangulo escaleno'
+tri = Triangulo(2,4,60,60,60)
+print(f'A área do triangulo é {tri.area}, seu perímetro é {tri.perimetro} e seu tipo é {tri.tipo_triangulo}')
+
+class Trapezio(FormaGeometrica):
+    
+    def __init__(self, lado, base_menor, lado_a, lado_b, altura):
+        super().__init__(lado)
+        self.__base_menor = base_menor
+        self.__lado_a = lado_a
+        self.__lado_b = lado_b
+        self.__altura = altura
+        self.__ladosIguais = True
+
+    @property
+    def area(self):
+        return ((self.lado + self.__base_menor) * self.__altura) / 2
+    
+    @property    
+    def perimetro(self):
+        return self.lado + self.__base_menor + self.__lado_a + self.__lado_b
+    
+    @property
+    def lados_iguais(self):
+        self.__ladosIguais = True
+    
+    @property
+    def tipo_trapezio(self):
+        if self.__ladosIguais:
+            return 'Trapézio isóscele'
+        else:
+            return 'Trapézio escaleno'
+tra = Trapezio(4,2,4,4,2)
+print(f'A área do trapézio é {tra.area}, seu perímetro é {tra.perimetro} e seu tipo é {tra.tipo_trapezio}')
