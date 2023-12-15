@@ -1,0 +1,101 @@
+class Pessoa():
+
+    def __init__(self, nome, idade, endereço, cpf, sexo):
+        self.__nome = nome
+        self.__idade = idade
+        self.__endereço = endereço
+        self.__cpf = cpf
+        self.__sexo = sexo
+
+    @property
+    def nome(self):
+        return self.__nome
+    
+    @property
+    def idade(self):
+        return self.__idade
+    
+    @property
+    def endereço(self):
+        return self.__endereço
+    
+    @property
+    def cpf(self):
+        return self.__cpf
+    
+    @property
+    def sexo(self):
+        return self.__sexo
+    
+    @property
+    def tudo(self):
+        return f'Nome: {self.nome}\n\nIdade: {self.idade}\n\nEndereço: {self.endereço}\n\nCPF: {self.cpf}\n\nSexo: {self.sexo}'
+class Pai(Pessoa):
+    
+    def __init__(self, nome, idade, endereço, cpf, sexo):
+        super().__init__(nome, idade, endereço, cpf, sexo)
+        self.__filho = 'Batman'
+        self.__esposa = 'Eliza'
+
+    @property
+    def filho(self):
+        return f"Filho: {self.__filho}"
+    @filho.setter
+    def filho(self, filho):
+        self.__filho = filho
+    
+    @property
+    def esposa(self):
+        return self.__esposa
+
+    @property 
+    def tudo(self):
+        return super().tudo
+
+class Mae(Pessoa):
+    
+    def __init__(self, nome, idade, endereço, cpf, sexo):
+        super().__init__(nome, idade, endereço, cpf, sexo)
+        
+        self.__esposo = 'Igor'
+        self.__filho = 'Batman'
+
+    @property
+    def esposo(self):
+        return self.__esposo
+    
+    @property
+    def filho(self):
+        return f"Filho: {self.__filho}"
+
+class Filho(Pai,Mae):
+    
+    def __init__(self, nome, idade, endereço, cpf, sexo):
+        super().__init__(nome, idade, endereço, cpf, sexo)
+
+    @property
+    def esposo(self):
+        return f'Pai: {super().esposo}'
+
+    @property
+    def esposa(self):
+        return f"Mãe: {super().esposa}"
+
+pai = Pai('Igor',34, 'Rua carajas, avenida 32, casa 01', '123321321-32', 'Masculino')
+print(pai.tudo)
+print(f"\nEsposa: {pai.esposa}")
+print('\n' + pai.filho)
+
+print('\n'+'###' * 8,'\n')
+
+mae = Mae('Eliza', 28 ,'Rua carajas, avenida 32, casa 01', '321443555-23', 'Feminino')
+print(mae.tudo)
+print(f"\nEsposo: {mae.esposo}")
+print('\n' + mae.filho)
+
+print('\n'+'###' * 8,'\n')
+
+filho = Filho('Batman', 7,'Rua carajas, avenida 32, casa 01', '442992112-99', 'Morcego' )
+print(filho.tudo)
+print('\n' + filho.esposo)
+print('\n' + filho.esposa)
